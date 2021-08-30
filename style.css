@@ -1,0 +1,74 @@
+#content{
+    height:97vh;
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+}
+#body{
+    align-items: center;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height:550px;
+}
+#display{
+    height:400px;
+    width:380px;
+    border:none;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.holder{
+    height:400px;
+    width:4px;
+    background-color: rgb(105,105,224);
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.item{
+    background-color: white;
+    width:6px;
+}
+#divide{
+    background-color:rgb(7, 7, 71);
+    width:390px;
+    height:4px;
+    border:none;
+    border-radius: 3px;
+}
+#sort{
+    width:250px;
+    display:flex;
+    justify-content: space-around;
+}
+#renew_list,#sort_button{
+    height:30px;
+    font-size: 20px;
+    color:white;
+    border:none;
+    border-radius: 30px;
+    background-color: rgb(214, 83, 35);
+    text-align: center;
+    display:inline-block; /*newly added*/
+}
+#renew_list{
+    width:122px;
+}
+#sort_button{
+    width:60px;
+}
+#sort_option{
+    font-size: 18px;
+    height:30px;
+    width:170px;
+    border-radius: 30px;
+    border-width: 2px;
+    border-color: rgb(7, 7, 71);
+    text-align-last: center;
+    -webkit-appearance: none; /*newly added*/
+}
+#sort_option:focus{
+    outline: none;
+}
