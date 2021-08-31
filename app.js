@@ -217,8 +217,6 @@ function heapSort(){
         to_sort[i] = temp1;
 
         setTimeout(function(){
-            console.log(i,temp1)
-            console.log(0,temp2)
             document.getElementById("I"+i).style.height=(400-temp1)+"px";
             document.getElementById("H"+i).style.backgroundColor=dark;
             document.getElementById("I"+0).style.height=(400-temp2)+"px";
