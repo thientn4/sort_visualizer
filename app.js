@@ -29,7 +29,7 @@ document.getElementById('renew_list').addEventListener('click',function(){
         cur_item.style.height=(400-to_sort[i])+"px";
         document.getElementById("H"+(i)).style.backgroundColor=blue;
     }
-    document.getElementById('sort_button').style.display="initial";
+    document.getElementById('sort_button').style.display="flex";
     document.getElementById("sort_option").disabled=false;
 });
 
@@ -168,64 +168,59 @@ function mergeSort(from=0,to=to_sort.length-1){
         return result
 }
 
-function heapify(n, i)
-{
-    let largest = i; // Initialize largest as root
-    let l = 2 * i + 1; // left = 2*i + 1
-    let r = 2 * i + 2; // right = 2*i + 2
+function heapify(heap_len, root){ //heapify is to push a root down if it is smaller than at least 1 of its child
+    let largest = root; // Initialize largest as root
+    let left = 2 * root + 1; // left = 2*i + 1
+    let right = 2 * root + 2; // right = 2*i + 2
 
     // If left child is larger than root
-    if (l < n && to_sort[l] > to_sort[largest])
-        largest = l;
+        if (left < heap_len && to_sort[left] > to_sort[largest])
+            largest = left;
 
     // If right child is larger than largest so far
-    if (r < n && to_sort[r] > to_sort[largest])
-        largest = r;
+        if (right < heap_len && to_sort[right] > to_sort[largest])
+            largest = right;
 
-    // If largest is not root
-    if (largest != i) {
-        let swap1 = to_sort[i];
-        let swap2 = to_sort[largest];
-        to_sort[i] = swap2;
-        to_sort[largest] = swap1;
+    // if root is not smaller than any of its 2 children --> swap with root
+        if (largest != root) {
+            let swap1 = to_sort[root];
+            let swap2 = to_sort[largest];
+            to_sort[root] = swap2;
+            to_sort[largest] = swap1;
 
-        let I=i
-        let L=largest
-        setTimeout(function(){
-            document.getElementById("I"+I).style.height=(400-swap2)+"px";
-            document.getElementById("I"+L).style.height=(400-swap1)+"px";
-        },time+=speed)
+            let I=root
+            let L=largest
+            setTimeout(function(){
+                document.getElementById("I"+I).style.height=(400-swap2)+"px";
+                document.getElementById("I"+L).style.height=(400-swap1)+"px";
+            },time+=speed)
 
-        // Recursively heapify the affected sub-tree
-        heapify(n, largest);
-    }
+            // Recursively heapify the affected sub-tree
+            heapify(heap_len, largest);
+        }
 }
 
 function heapSort(){
-    let n = to_sort.length;
- 
-    // Build heap (rearrange array)
-    for (let i = Math.floor(n / 2) - 1; i >= 0; i--)
-        heapify(n, i);
-
-    // One by one extract an element from heap
-    for (let i = n - 1; i > 0; i--) {
-        // Move current root to end
-        let temp1 = to_sort[0];
-        let temp2 = to_sort[i];
-        to_sort[0] = temp2;
-        to_sort[i] = temp1;
-
-        setTimeout(function(){
-            document.getElementById("I"+i).style.height=(400-temp1)+"px";
-            document.getElementById("H"+i).style.backgroundColor=dark;
-            document.getElementById("I"+0).style.height=(400-temp2)+"px";
-            document.getElementById("H"+0).style.backgroundColor=dark;
-        },time+=speed)
-
-        // call max heapify on the reduced heap
-        heapify(i, 0);
-    }
+    // Build heap (rearrange array) by iteratively pushing each node down to its children if the node is smaller than its children 
+        for (let i = Math.floor(to_sort.length / 2) - 1; i >= 0; i--)
+            heapify(to_sort.length, i);
+    // One by one extract an element from heap and placing it at the correct ending spot
+        for (let i = to_sort.length - 1; i > 0; i--) {
+            // Move current root to end
+                let temp1 = to_sort[0];
+                let temp2 = to_sort[i];
+                to_sort[0] = temp2;
+                to_sort[i] = temp1;
+            // display on UI
+                setTimeout(function(){
+                    document.getElementById("I"+i).style.height=(400-temp1)+"px";
+                    document.getElementById("H"+i).style.backgroundColor=dark;
+                    document.getElementById("I"+0).style.height=(400-temp2)+"px";
+                    document.getElementById("H"+0).style.backgroundColor=dark;
+                },time+=speed)
+            // call max heapify on the reduced heap rebuild the heap by finding a correct heap sort for the swapped root
+                heapify(i, 0);
+        }
 }
 
 document.getElementById('sort_button').addEventListener('click',function(){
