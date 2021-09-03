@@ -51,7 +51,10 @@
     border-radius: 30px;
     background-color: rgb(214, 83, 35);
     text-align: center;
-    display:inline-block; /*newly added*/
+    font-family: Arial, Helvetica, sans-serif;
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }
 #renew_list{
     width:122px;
@@ -68,6 +71,12 @@
     border-color: rgb(7, 7, 71);
     text-align-last: center;
     -webkit-appearance: none; /*newly added*/
+
+    
+    font-family: Arial, Helvetica, sans-serif;
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }
 #sort_option:focus{
     outline: none;
