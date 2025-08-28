@@ -4,14 +4,15 @@ let my_list=document.getElementById("display")
 let red="rgb(214, 83, 35)"
 let blue="rgb(105,105,224)"
 let dark="rgb(19, 19, 117)"
+let size=25
 
-for(let i=0; i<50; i++){
-    to_sort[i]=Math.floor(Math.random()*340)+20;
+for(let i=0; i<size; i++){
+    to_sort[i]=Math.floor(Math.random()*85)+5;
 
     let cur_item=document.createElement("div");
     cur_item.id="I"+i;
     cur_item.className="item";
-    cur_item.style.height=(400-to_sort[i])+"px";
+    cur_item.style.height=(to_sort[i])+"%";
 
     let cur_holder=document.createElement("div");
     cur_holder.id="H"+i;
@@ -23,11 +24,11 @@ for(let i=0; i<50; i++){
 
 document.getElementById('renew_list').addEventListener('click',function(){
     for(let i=0; i<to_sort.length; i++){
-        to_sort[i]=Math.floor(Math.random()*340)+20;
+        to_sort[i]=Math.floor(Math.random()*85)+5;
     
         let cur_item=document.getElementById("I"+i);
-        cur_item.style.height=(400-to_sort[i])+"px";
-        document.getElementById("H"+(i)).style.backgroundColor=blue;
+        cur_item.style.height=(to_sort[i])+"%";
+        document.getElementById("I"+(i)).style.backgroundColor=blue;
     }
     document.getElementById('sort_button').style.display="flex";
     document.getElementById("sort_option").disabled=false;
@@ -35,7 +36,7 @@ document.getElementById('renew_list').addEventListener('click',function(){
 });
 
 
-let speed=10;
+let speed=50;
 let time=0
 
 function selectionSort(){
@@ -43,20 +44,20 @@ function selectionSort(){
         let min_index=i
         for(let j=i+1; j<to_sort.length; j++){
             setTimeout(function(){
-                document.getElementById("H"+j).style.backgroundColor=dark;
+                document.getElementById("I"+j).style.backgroundColor=dark;
                 if(to_sort[j]<to_sort[min_index]){
                     min_index=j
                 }
             },time+=speed);
-            setTimeout(function(){document.getElementById("H"+j).style.backgroundColor=blue},time+=speed);
+            setTimeout(function(){document.getElementById("I"+j).style.backgroundColor=blue},time+=speed);
         }
         setTimeout(function(){
             let holder=to_sort[i];
             to_sort[i]=to_sort[min_index];
             to_sort[min_index]=holder;
-            document.getElementById("I"+i).style.height=(400-to_sort[i])+"px";
-            document.getElementById("I"+min_index).style.height=(400-to_sort[min_index])+"px";
-            document.getElementById("H"+i).style.backgroundColor=dark;
+            document.getElementById("I"+i).style.height=(to_sort[i])+"%";
+            document.getElementById("I"+min_index).style.height=(to_sort[min_index])+"%";
+            document.getElementById("I"+i).style.backgroundColor=dark;
         },time+=speed);
     }
 }
@@ -65,16 +66,16 @@ function bubbleSort(){
     for(let i=0; i<to_sort.length-1;i++){
         for(let j=0; j<to_sort.length-1-i; j++){
             setTimeout(function(){
-                document.getElementById("H"+(j)).style.backgroundColor=blue;
+                document.getElementById("I"+(j)).style.backgroundColor=blue;
                 if(to_sort[j]>to_sort[j+1]){
                     let holder=to_sort[j]
                     to_sort[j]=to_sort[j+1]
                     to_sort[j+1]=holder
-                    document.getElementById("I"+j).style.height=(400-to_sort[j])+"px";
-                    document.getElementById("I"+(j+1)).style.height=(400-to_sort[j+1])+"px";
+                    document.getElementById("I"+j).style.height=(to_sort[j])+"%";
+                    document.getElementById("I"+(j+1)).style.height=(to_sort[j+1])+"%";
                 }
             },time+=speed);
-            setTimeout(function(){document.getElementById("H"+(j+1)).style.backgroundColor=dark},time+=speed);
+            setTimeout(function(){document.getElementById("I"+(j+1)).style.backgroundColor=dark},time+=speed);
         }
     }
 }
@@ -84,7 +85,7 @@ function insertionSort(){
         for(let j=i;j>=0;j--){
             if(j==0||to_sort[j-1]<=to_sort[j]){
                 setTimeout(function(){
-                    document.getElementById("H"+j).style.backgroundColor=dark;
+                    document.getElementById("I"+j).style.backgroundColor=dark;
                 },time+=speed)
                 break;
             }
@@ -93,10 +94,10 @@ function insertionSort(){
             to_sort[j]=preJ;
             to_sort[j-1]=curJ;
             setTimeout(function(){
-                document.getElementById("I"+j).style.height=(400-preJ)+"px";
-                document.getElementById("I"+(j-1)).style.height=(400-curJ)+"px";
-                document.getElementById("H"+j).style.backgroundColor=dark;
-                document.getElementById("H"+(j-1)).style.backgroundColor=blue;
+                document.getElementById("I"+j).style.height=(preJ)+"%";
+                document.getElementById("I"+(j-1)).style.height=(curJ)+"%";
+                document.getElementById("I"+j).style.backgroundColor=dark;
+                document.getElementById("I"+(j-1)).style.backgroundColor=blue;
             },time+=speed)
         }
     }
@@ -115,10 +116,10 @@ function quickSort(low=0,high=to_sort.length-1){
                     to_sort[pivotPos]=holder2
                     to_sort[iter]=holder1
                     setTimeout(function(){
-                        document.getElementById("I"+pivotPos).style.height=(400-holder2)+"px";
-                        document.getElementById("H"+pivotPos).style.backgroundColor=dark;
-                        document.getElementById("I"+iter).style.height=(400-holder1)+"px";
-                        document.getElementById("H"+iter).style.backgroundColor=dark;
+                        document.getElementById("I"+pivotPos).style.height=(holder2)+"%";
+                        document.getElementById("I"+pivotPos).style.backgroundColor=dark;
+                        document.getElementById("I"+iter).style.height=(holder1)+"%";
+                        document.getElementById("I"+iter).style.backgroundColor=dark;
                     },time+=speed)
                 }
             }
@@ -127,9 +128,9 @@ function quickSort(low=0,high=to_sort.length-1){
             to_sort[pivotPos+1]=holder2
             to_sort[high]=holder1
             setTimeout(function(){
-                document.getElementById("I"+(pivotPos+1)).style.height=(400-holder2)+"px";
-                document.getElementById("H"+(pivotPos+1)).style.backgroundColor=dark;
-                document.getElementById("I"+high).style.height=(400-holder1)+"px";
+                document.getElementById("I"+(pivotPos+1)).style.height=(holder2)+"%";
+                document.getElementById("I"+(pivotPos+1)).style.backgroundColor=dark;
+                document.getElementById("I"+high).style.height=(holder1)+"%";
             },time+=speed)
         //left side recursion
             quickSort(low,pivotPos)
@@ -161,8 +162,8 @@ function mergeSort(from=0,to=to_sort.length-1){
         for(let i=0;i<result.length;i++){
             let cur_item=result[i]
             setTimeout(function(){
-                document.getElementById("I"+(from+i)).style.height=(400-cur_item)+"px";
-                document.getElementById("H"+(from+i)).style.backgroundColor=dark;
+                document.getElementById("I"+(from+i)).style.height=(cur_item)+"%";
+                document.getElementById("I"+(from+i)).style.backgroundColor=dark;
             },time+=speed)
         }
     //return
@@ -192,8 +193,8 @@ function heapify(heap_len, root){ //heapify is to push a root down if it is smal
             let I=root
             let L=largest
             setTimeout(function(){
-                document.getElementById("I"+I).style.height=(400-swap2)+"px";
-                document.getElementById("I"+L).style.height=(400-swap1)+"px";
+                document.getElementById("I"+I).style.height=(swap2)+"%";
+                document.getElementById("I"+L).style.height=(swap1)+"%";
             },time+=speed)
 
             // Recursively heapify the affected sub-tree
@@ -214,10 +215,10 @@ function heapSort(){
                 to_sort[i] = temp1;
             // display on UI
                 setTimeout(function(){
-                    document.getElementById("I"+i).style.height=(400-temp1)+"px";
-                    document.getElementById("H"+i).style.backgroundColor=dark;
-                    document.getElementById("I"+0).style.height=(400-temp2)+"px";
-                    document.getElementById("H"+0).style.backgroundColor=dark;
+                    document.getElementById("I"+i).style.height=(temp1)+"%";
+                    document.getElementById("I"+i).style.backgroundColor=dark;
+                    document.getElementById("I"+0).style.height=(temp2)+"%";
+                    document.getElementById("I"+0).style.backgroundColor=dark;
                 },time+=speed)
             // call max heapify on the reduced heap rebuild the heap by finding a correct heap sort for the swapped root
                 heapify(i, 0);
@@ -225,10 +226,7 @@ function heapSort(){
 }
 
 document.getElementById('sort_button').addEventListener('click',function(){
-    if(document.getElementById('sort_button').textContent ==="exit"){
-        location.reload();
-        return;
-    }
+        if(document.getElementById('sort_button').textContent ==="exit")return location.reload();
     //block button for algo to run
         let option=document.getElementById("sort_option").selectedIndex;
         document.getElementById('renew_list').style.backgroundColor="white";
@@ -255,9 +253,10 @@ document.getElementById('sort_button').addEventListener('click',function(){
             heapSort()
         }
     //unblock button and reset time to 0 after algo complete its job
+        console.log(time)
         setTimeout(function(){
-            document.getElementById("H0").style.backgroundColor=dark;
-            document.getElementById("H49").style.backgroundColor=dark;
+            document.getElementById("I0").style.backgroundColor=dark;
+            document.getElementById(`I${size-1}`).style.backgroundColor=dark;
             document.getElementById('renew_list').style.backgroundColor=red;
             document.getElementById("renew_list").disabled=false;        
             document.getElementById('sort_button').style.display="none";

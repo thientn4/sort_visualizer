@@ -1,47 +1,45 @@
-#content{
-    height:97vh;
-    display:flex;
-    flex-direction:column;
-    justify-content: center;
-}
-#body{
-    align-items: center;
-    display:flex;
-    flex-direction: column;
-    justify-content: space-around;
-    height:550px;
+html, body {
+    width:100vw;
+    height: 100%; /* Make html and body fill the viewport height */
+    margin: 0;   /* Remove default body margin */
+    padding: 0;  /* Remove default body padding */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Arrange children in a column */
+    align-items: center; /* Center children horizontally */
+    justify-content: center; /* Center children vertically */
+    padding:5px;
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
 #display{
-    height:400px;
-    width:380px;
+    height:50%;
+    width:100%;
+    max-width:380px;
     border:none;
     display:flex;
     flex-direction: row;
     justify-content: space-evenly;
+    border-bottom: 4px solid rgb(7, 7, 71);
+    padding:5px;
+    margin-top:15px;
+    margin-bottom:15px;
+    box-sizing: border-box;
 }
 .holder{
-    height:400px;
-    width:4px;
-    background-color: rgb(105,105,224);
+    height:100%;
+    width:2%;
+    background-color: white;
     display:flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-end;
 }
 .item{
-    background-color: white;
-    width:6px;
-}
-#divide{
-    background-color:rgb(7, 7, 71);
-    width:390px;
-    height:4px;
-    border:none;
-    border-radius: 3px;
+    background-color: rgb(105,105,224);
+    width:100%;
 }
 #sort{
-    width:250px;
     display:flex;
-    justify-content: space-around;
+    padding-bottom:15px;
 }
 #renew_list,#sort_button{
     height:30px;
@@ -57,15 +55,18 @@
     justify-content: center;
 }
 #renew_list{
-    width:122px;
+    padding-left:0.2in;
+    padding-right:0.2in;
 }
 #sort_button{
-    width:60px;
+    width:0.75in;
 }
 #sort_option{
     font-size: 18px;
     height:30px;
-    width:170px;
+    margin-right:0.1in;
+    padding-left:0.2in;
+    padding-right:0.2in;
     border-radius: 30px;
     border-width: 2px;
     border-color: rgb(7, 7, 71);
