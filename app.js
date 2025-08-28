@@ -31,6 +31,7 @@ document.getElementById('renew_list').addEventListener('click',function(){
     }
     document.getElementById('sort_button').style.display="flex";
     document.getElementById("sort_option").disabled=false;
+    document.getElementById('sort_button').textContent ="sort";
 });
 
 
@@ -224,7 +225,7 @@ function heapSort(){
 }
 
 document.getElementById('sort_button').addEventListener('click',function(){
-    if(document.getElementById('sort_button').textContent ==="stop"){
+    if(document.getElementById('sort_button').textContent ==="exit"){
         location.reload();
         return;
     }
@@ -232,7 +233,7 @@ document.getElementById('sort_button').addEventListener('click',function(){
         let option=document.getElementById("sort_option").selectedIndex;
         document.getElementById('renew_list').style.backgroundColor="white";
         document.getElementById("renew_list").disabled=true;
-        document.getElementById('sort_button').textContent ="stop";
+        document.getElementById('sort_button').textContent ="exit";
         document.getElementById("sort_option").disabled=true;
     //run algo and unblock "renew button" once algo is done
         if(option==0){ //selection sort
