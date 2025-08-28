@@ -32,14 +32,13 @@ document.getElementById('renew_list').addEventListener('click',function(){
     }
     document.getElementById('sort_button').style.display="flex";
     document.getElementById("sort_option").disabled=false;
+    document.getElementById("speed_option").disabled=false;
     document.getElementById('sort_button').textContent ="sort";
 });
 
-
-let speed=50;
 let time=0
 
-function selectionSort(){
+function selectionSort(speed){
     for(let i=0; i<to_sort.length; i++){
         let min_index=i
         for(let j=i+1; j<to_sort.length; j++){
@@ -62,7 +61,7 @@ function selectionSort(){
     }
 }
 
-function bubbleSort(){
+function bubbleSort(speed){
     for(let i=0; i<to_sort.length-1;i++){
         for(let j=0; j<to_sort.length-1-i; j++){
             setTimeout(function(){
@@ -80,7 +79,7 @@ function bubbleSort(){
     }
 }
 
-function insertionSort(){
+function insertionSort(speed){
     for(let i=0;i<to_sort.length;i++){
         for(let j=i;j>=0;j--){
             if(j==0||to_sort[j-1]<=to_sort[j]){
@@ -103,7 +102,7 @@ function insertionSort(){
     }
 }
 
-function quickSort(low=0,high=to_sort.length-1){
+function quickSort(speed,low=0,high=to_sort.length-1){
     if(low<high){
         //pick final item as pivot and partition
             let pivotVal=to_sort[high]
@@ -133,21 +132,21 @@ function quickSort(low=0,high=to_sort.length-1){
                 document.getElementById("I"+high).style.height=(item1)+"%";
             },time+=speed)
         //left side recursion
-            quickSort(low,pivotPos)
+            quickSort(speed,low,pivotPos)
         //right side recursion
-            quickSort(pivotPos+2,high)
+            quickSort(speed,pivotPos+2,high)
     }
 }
 
-function mergeSort(from=0,to=to_sort.length-1){
+function mergeSort(speed,from=0,to=to_sort.length-1){
         if(to<from)return[]
         if(to==from)return[to_sort[to]]
     //find middle index
         let mid=Math.floor((from+to)/2)
     //mergeSort first half
-        let first_half=mergeSort(from,mid)
+        let first_half=mergeSort(speed,from,mid)
     //mergeSort second half
-        let second_half=mergeSort(mid+1,to)
+        let second_half=mergeSort(speed,mid+1,to)
     //merge both halves
         let result=[]
         while(first_half.length!=0&&second_half.length!=0){
@@ -170,7 +169,7 @@ function mergeSort(from=0,to=to_sort.length-1){
         return result
 }
 
-function heapSort(){
+function heapSort(speed){
     //heapify is to push a root down if it is smaller than at least 1 of its children
         function heapify(heap_len, root){
             let largest = root; // Initialize largest as root
@@ -233,24 +232,26 @@ document.getElementById('sort_button').addEventListener('click',function(){
         document.getElementById("renew_list").disabled=true;
         document.getElementById('sort_button').textContent ="exit";
         document.getElementById("sort_option").disabled=true;
+        document.getElementById("speed_option").disabled=true;
     //run algo and unblock "renew button" once algo is done
+        let speed=parseInt(document.getElementById("speed_option").value);
         if(option==0){ //selection sort
-            selectionSort()
+            selectionSort(speed)
         }
         else if(option==1){ //bubble sort
-            bubbleSort()
+            bubbleSort(speed)
         }
         else if(option==2){ //insertion sort
-            insertionSort()
+            insertionSort(speed)
         }
         else if(option==3){ //quick sort
-            quickSort()
+            quickSort(speed)
         }
         else if(option==4){ //merge sort
-            mergeSort()
+            mergeSort(speed)
         }
         else{ //heap sort
-            heapSort()
+            heapSort(speed)
         }
     //unblock button and reset time to 0 after algo complete its job
         console.log(time)

@@ -39,7 +39,8 @@ html, body {
 }
 #sort{
     display:flex;
-    padding-bottom:15px;
+    flex-flow:wrap;
+    justify-content: center;
 }
 #renew_list,#sort_button{
     height:30px;
@@ -60,11 +61,15 @@ html, body {
 }
 #sort_button{
     width:0.75in;
+    margin-right:0.05in;
+    margin-left:0.05in;
+    margin-bottom:15px;
 }
-#sort_option{
+#speed_option, #sort_option{
     font-size: 18px;
     height:30px;
-    margin-right:0.1in;
+    margin-right:0.05in;
+    margin-left:0.05in;
     padding-left:0.2in;
     padding-right:0.2in;
     border-radius: 30px;
@@ -76,6 +81,7 @@ html, body {
     display:flex;
     align-items: center;
     justify-content: center;
+    margin-bottom:15px;
 }
 #sort_option option{
     font-family: Arial, Helvetica, sans-serif;
