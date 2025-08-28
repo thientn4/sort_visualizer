@@ -111,26 +111,26 @@ function quickSort(low=0,high=to_sort.length-1){
             for(let iter=low;iter<=high-1;iter++){
                 if(to_sort[iter]<pivotVal){
                     pivotPos++
-                    let holder1=to_sort[pivotPos]
-                    let holder2=to_sort[iter]
-                    to_sort[pivotPos]=holder2
-                    to_sort[iter]=holder1
+                    let item1=to_sort[pivotPos]
+                    let item2=to_sort[iter]
+                    to_sort[pivotPos]=item2
+                    to_sort[iter]=item1
                     setTimeout(function(){
-                        document.getElementById("I"+pivotPos).style.height=(holder2)+"%";
+                        document.getElementById("I"+pivotPos).style.height=(item2)+"%";
                         document.getElementById("I"+pivotPos).style.backgroundColor=dark;
-                        document.getElementById("I"+iter).style.height=(holder1)+"%";
+                        document.getElementById("I"+iter).style.height=(item1)+"%";
                         document.getElementById("I"+iter).style.backgroundColor=dark;
                     },time+=speed)
                 }
             }
-            let holder1=to_sort[pivotPos+1]
-            let holder2=to_sort[high]
-            to_sort[pivotPos+1]=holder2
-            to_sort[high]=holder1
+            let item1=to_sort[pivotPos+1]
+            let item2=to_sort[high]
+            to_sort[pivotPos+1]=item2
+            to_sort[high]=item1
             setTimeout(function(){
-                document.getElementById("I"+(pivotPos+1)).style.height=(holder2)+"%";
+                document.getElementById("I"+(pivotPos+1)).style.height=(item2)+"%";
                 document.getElementById("I"+(pivotPos+1)).style.backgroundColor=dark;
-                document.getElementById("I"+high).style.height=(holder1)+"%";
+                document.getElementById("I"+high).style.height=(item1)+"%";
             },time+=speed)
         //left side recursion
             quickSort(low,pivotPos)
@@ -170,39 +170,39 @@ function mergeSort(from=0,to=to_sort.length-1){
         return result
 }
 
-function heapify(heap_len, root){ //heapify is to push a root down if it is smaller than at least 1 of its child
-    let largest = root; // Initialize largest as root
-    let left = 2 * root + 1; // left = 2*i + 1
-    let right = 2 * root + 2; // right = 2*i + 2
-
-    // If left child is larger than root
-        if (left < heap_len && to_sort[left] > to_sort[largest])
-            largest = left;
-
-    // If right child is larger than largest so far
-        if (right < heap_len && to_sort[right] > to_sort[largest])
-            largest = right;
-
-    // if root is not smaller than any of its 2 children --> swap with root
-        if (largest != root) {
-            let swap1 = to_sort[root];
-            let swap2 = to_sort[largest];
-            to_sort[root] = swap2;
-            to_sort[largest] = swap1;
-
-            let I=root
-            let L=largest
-            setTimeout(function(){
-                document.getElementById("I"+I).style.height=(swap2)+"%";
-                document.getElementById("I"+L).style.height=(swap1)+"%";
-            },time+=speed)
-
-            // Recursively heapify the affected sub-tree
-            heapify(heap_len, largest);
-        }
-}
-
 function heapSort(){
+    //heapify is to push a root down if it is smaller than at least 1 of its children
+        function heapify(heap_len, root){
+            let largest = root; // Initialize largest as root
+            let left = 2 * root + 1; // left = 2*i + 1
+            let right = 2 * root + 2; // right = 2*i + 2
+
+            // If left child is larger than root
+                if (left < heap_len && to_sort[left] > to_sort[largest])
+                    largest = left;
+
+            // If right child is larger than largest so far
+                if (right < heap_len && to_sort[right] > to_sort[largest])
+                    largest = right;
+
+            // if root is not smaller than any of its 2 children --> swap with root
+                if (largest != root) {
+                    let swap1 = to_sort[root];
+                    let swap2 = to_sort[largest];
+                    to_sort[root] = swap2;
+                    to_sort[largest] = swap1;
+
+                    let I=root
+                    let L=largest
+                    setTimeout(function(){
+                        document.getElementById("I"+I).style.height=(swap2)+"%";
+                        document.getElementById("I"+L).style.height=(swap1)+"%";
+                    },time+=speed)
+
+                    // Recursively heapify the affected sub-tree
+                    heapify(heap_len, largest);
+                }
+        }
     // Build heap (rearrange array) by iteratively pushing each node down to its children if the node is smaller than its children 
         for (let i = Math.floor(to_sort.length / 2) - 1; i >= 0; i--)
             heapify(to_sort.length, i);
