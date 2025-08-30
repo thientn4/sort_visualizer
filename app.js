@@ -103,38 +103,36 @@ function insertionSort(speed){
 }
 
 function quickSort(speed,low=0,high=to_sort.length-1){
-    if(low<high){
-        //pick final item as pivot and partition
-            let pivotVal=to_sort[high]
-            let pivotPos=low-1 //all value appearing before pivotPos will be smaller than pivotVal
-            for(let iter=low;iter<=high-1;iter++){
-                if(to_sort[iter]<pivotVal){
-                    pivotPos++
-                    let pItem=to_sort[pivotPos]
-                    let iItem=to_sort[iter]
-                    to_sort[pivotPos]=iItem
-                    to_sort[iter]=pItem
-                    setTimeout(function(){
-                        document.getElementById("I"+pivotPos).style.height=(iItem)+"%";
-                        document.getElementById("I"+pivotPos).style.backgroundColor=dark;
-                        document.getElementById("I"+iter).style.height=(pItem)+"%";
-                    },time+=speed)
-                }
+        if(low>high)return
+    //pick final item as pivot and partition
+        let pivotVal=to_sort[high]
+        let pivotPos=low-1 //all value appearing before pivotPos will be smaller than pivotVal
+        for(let iter=low;iter<=high-1;iter++){
+            if(to_sort[iter]<pivotVal){
+                pivotPos++
+                let pItem=to_sort[pivotPos]
+                let iItem=to_sort[iter]
+                to_sort[pivotPos]=iItem
+                to_sort[iter]=pItem
+                setTimeout(function(){
+                    document.getElementById("I"+pivotPos).style.height=(iItem)+"%";
+                    document.getElementById("I"+iter).style.height=(pItem)+"%";
+                },time+=speed)
             }
-            let pItem=to_sort[pivotPos+1]
-            let iItem=to_sort[high]
-            to_sort[pivotPos+1]=iItem
-            to_sort[high]=pItem
-            setTimeout(function(){
-                document.getElementById("I"+(pivotPos+1)).style.height=(iItem)+"%";
-                document.getElementById("I"+(pivotPos+1)).style.backgroundColor=dark;
-                document.getElementById("I"+high).style.height=(pItem)+"%";
-            },time+=speed)
-        //left side recursion
-            quickSort(speed,low,pivotPos)
-        //right side recursion
-            quickSort(speed,pivotPos+2,high)
-    }
+        }
+        let pItem=to_sort[pivotPos+1]
+        let iItem=to_sort[high]
+        to_sort[pivotPos+1]=iItem
+        to_sort[high]=pItem
+        setTimeout(function(){
+            document.getElementById("I"+(pivotPos+1)).style.height=(iItem)+"%";
+            document.getElementById("I"+(pivotPos+1)).style.backgroundColor=dark;
+            document.getElementById("I"+high).style.height=(pItem)+"%";
+        },time+=speed)
+    //left side recursion
+        quickSort(speed,low,pivotPos)
+    //right side recursion
+        quickSort(speed,pivotPos+2,high)
 }
 
 function mergeSort(speed,from=0,to=to_sort.length-1){
