@@ -246,7 +246,6 @@ document.getElementById('sort_button').addEventListener('click',function(){
             heapSort(speed)
         }
     //unblock button and reset time to 0 after algo complete its job
-        console.log(time)
         setTimeout(function(){
             document.getElementById("I0").style.backgroundColor=dark;
             document.getElementById(`I${size-1}`).style.backgroundColor=dark;
