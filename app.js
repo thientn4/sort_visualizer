@@ -105,24 +105,24 @@ function insertionSort(speed){
 function quickSort(speed,low=0,high=to_sort.length-1){
         if(low>high)return
     //pick final item as pivot and partition
-        let pivotVal=to_sort[high]
+        let pivotPos=high//Math.floor((low+high)/2)
         let pivotIter=low-1 //all value appearing before pivotPos will be smaller than pivotVal
         for(let iter=low;iter<=high-1;iter++){
-            if(to_sort[iter]<pivotVal){
+            if(to_sort[iter]<to_sort[pivotPos]){
                 pivotIter++
                 [to_sort[pivotIter],to_sort[iter]]=[to_sort[iter],to_sort[pivotIter]]
                 setTimeout(function(){
-                    document.getElementById("I"+high).style.backgroundColor=red
+                    document.getElementById("I"+pivotPos).style.backgroundColor=red
                     document.getElementById("I"+pivotIter).style.height=(to_sort[pivotIter])+"%";
                     document.getElementById("I"+iter).style.height=(to_sort[iter])+"%";
                 },time+=speed)
             }
         }
-        [to_sort[pivotIter+1],to_sort[high]]=[to_sort[high],to_sort[pivotIter+1]]
+        [to_sort[pivotIter+1],to_sort[pivotPos]]=[to_sort[pivotPos],to_sort[pivotIter+1]]
         setTimeout(function(){
             document.getElementById("I"+(pivotIter+1)).style.height=(to_sort[pivotIter+1])+"%";
             document.getElementById("I"+(pivotIter+1)).style.backgroundColor=dark;
-            document.getElementById("I"+high).style.height=(to_sort[high])+"%";
+            document.getElementById("I"+pivotPos).style.height=(to_sort[pivotPos])+"%";
         },time+=speed)
     //left side recursion
         quickSort(speed,low,pivotIter)
