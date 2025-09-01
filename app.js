@@ -151,8 +151,9 @@ function mergeSort(speed,from=0,to=to_sort.length-1){
         result.push(...second_half)
     //copy to diplay on UI
         for(let i=0;i<result.length;i++){
+            let cur_item=result[i]
             setTimeout(function(){
-                document.getElementById("I"+(from+i)).style.height=(result[i])+"%";
+                document.getElementById("I"+(from+i)).style.height=cur_item+"%";
                 document.getElementById("I"+(from+i)).style.backgroundColor=dark;
             },time+=speed)
         }
